@@ -1,0 +1,64 @@
+<div class='cell'>
+  <div class="poster-block">
+    <div class="user-avatar">
+      <a href="/user/<%= topic.author.loginname %>">
+        <img src="<%= helper.proxy(topic.author.avatar_url) %>"
+          title="<%= topic.author.loginname %>"
+        />
+      </a>
+    </div>
+    <div class="user-infos">
+      <div class="topic-title">
+          <a href='/topic/<%= topic._id %>' title='<%= topic.title %>'>
+            <%= topic.title %>
+          </a>
+      </div>
+        <div class="user-post-info">
+            <% if (topic.reply && topic.reply.author) {%>
+              <span class="user-name" style="color: #aaa">
+                <a href="/user/<%= topic.reply.author.loginname %>" title="<%= topic.reply.author.loginname %>" >
+                  <%= topic.reply.author.loginname %>
+                </a>
+              </span>  
+              <span style="color: #aaa"> replied </span>  <span class="user-time" style="color: #aaa" ><%= helper.ago(topic.last_reply_at)%></span>
+            <% } %>
+            <% if (!topic.reply) {%>
+              <span class="user-name">
+                  <a href="/user/<%= topic.author.loginname %>" title="<%= topic.author.loginname %>" >
+                    <%= topic.author.loginname %>
+                  </a>
+                </span>
+                发布于 <span class="user-time"><%= helper.ago(topic.create_at) %></span>
+            <% } %>
+        </div>
+    </div>
+    <div class="user-menu">
+        <%
+          var tabObj = helper.tabObj(topic.tab);
+        %>
+        <span class="topiclist-tab" style="background-color: <%=tabObj.color%>; color: <%= tabObj.fontColor%>"><%= tabObj.name %></span>
+        <span class="DiscussionListItem-count" title="">
+          <span  title="回复数">
+            <%= topic.reply_count %>
+          </span>
+          <span >/</span>
+          <span  title='点击数'>
+            <%= topic.visit_count %>
+          </span>
+        </span>
+    </div>
+    <div class="sub-menu"  onclick="showSubMenu('menu<%= topic.id %>')" >
+        <i class="icon fa fa-ellipsis-v"></i>
+        <ul class="Dropdown-menu dropdown-menu" id="menu<%= topic.id %>" onmouseleave="this.style.display = 'none';">
+          <% if (current_user._id.equals(topic.author_id)) { %>
+          <li class="item-subscription">
+            <button class=" hasIcon" id="deleteTopic" onclick="deleteTopic('<%= topic.id %>')" type="button" title="Follow">
+              <i class="icon fa fa-trash Button-icon"></i>
+              <span class="Button-label " >删除</span>
+            </button>
+          </li>
+          <% } %>
+        </ul>
+    </div>
+  </div> 
+</div>
