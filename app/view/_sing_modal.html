@@ -1,0 +1,63 @@
+<div class="global-mask" id="loginRegModal" style="display: none">
+    <div class="Modal modal-dialog Modal--small SignUpModal">
+        <div class="Modal-content">
+            <div class="Modal-close App-backControl">
+                <button class="Button Button--icon Button--link hasIcon" id="close" type="button">
+                    <i class="icon fa fa-fw fa-times Button-icon"></i>
+                </button>
+            </div>
+            <form action='/signup' method='post'>
+                <div class="Modal-header">
+                    <h3 class="App-titleControl App-titleControl--text">注册</h3>
+                </div>
+                <div class="Modal-alert"></div>
+                <div class="Modal-body">
+                    <div class="LogInButtons">
+                        <button class="Button LogInButton--github LogInButton hasIcon" path="/auth/github" type="button" title="使用 GitHub 登入">
+                            <i class="icon fa fa-fw fa-github Button-icon"></i>
+                            <span class="Button-label">使用 GitHub 登入</span>
+                        </button>
+                    </div>
+                    <div class="Form Form--centered">
+                        <div class="Form-group">
+                            <input class="FormControl" id="loginname" name="loginname" type="text" placeholder="用户名">
+                        </div>
+                        <div class="Form-group">
+                            <input class="FormControl" id="email" name="email" type="email" placeholder="邮箱">
+                        </div>
+                        <div class="Form-group">
+                            <input class="FormControl" id="pass" name="pass" type="password" placeholder="密码">
+                        </div>
+                        <div class="Form-group">
+                            <input class="FormControl" id="re_pass" name="re_pass" type="password" placeholder="确认密码">
+                        </div>
+                        <input type='hidden' name='_csrf' value='<%= csrf %>' />
+                        <div class="Form-group">
+                            <button class="Button Button--primary Button--block" type="submit" title="注册">
+                                <span class="Button-label">注册</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="Modal-footer">
+                    <p class="SignUpModal-logIn">已经注册过了？
+                        <a>登入</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#menuButtonReg").click(function (event) {
+            $("#loginRegModal").fadeToggle();
+        });
+        $("#loginRegModal").click(function (event) {
+            if (event.target.nodeName === "I" && event.target.parentNode.id === "close") {
+                $("#loginRegModal").fadeToggle();
+            }
+        });
+    });
+</script>
