@@ -692,6 +692,21 @@ a.topic_title {
   white-space: nowrap;
 }
 
+.topic_edit_title_warp {
+  height: 50px;
+  width: 100%;
+  padding: 5px;
+}
+
+.topic_edit_title_warp input {
+  height: 100%;
+  width: 100%;
+  padding: 5px;
+  border: none;
+  border-bottom: 1px solid #e8ecf3;
+  font-size: 16px;
+}
+
 .put_top, .put_good {
   background: @node_green;
   padding: 2px 4px;
@@ -1196,7 +1211,6 @@ textarea.editor {
   .span-common();
   height: 36px;
   line-height: 30px;
-  width: 100%;
   color: white;
   text-align: center;
   background-color: #4d698e;
@@ -1236,7 +1250,6 @@ textarea.editor {
 }
 
 .topic-tab {
-  margin: 0 10px;
   color: @node_blue;
   &.current-tab {
     background-color: @node_blue;
@@ -1430,7 +1443,6 @@ ul.slide-tabs li .hasIcon {
 
 ul.slide-tabs li > a {
   color: #667c99 ;
-  padding-left: 20px;
   position: relative;
   color: #667c99 !important;
   &:hover {

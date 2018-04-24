@@ -22,7 +22,7 @@ class UserService extends Service {
   /*
    * 根据登录名查找用户
    * @param {String} loginName 登录名
-   * @return {Promise[user]} 承载用户的 Promise 对象
+   * @return {Pr omise[user]} 承载用户的 Promise 对象
    */
   getUserByLoginName(loginName) {
     const query = { loginname: new RegExp('^' + loginName + '$', 'i') };
@@ -121,7 +121,7 @@ class UserService extends Service {
     user.pass = pass;
     user.email = email;
     user.avatar = avatar_url;
-    user.active = active || false;
+    user.active = true;//active || false;
     user.accessToken = uuid.v4();
 
     return user.save();

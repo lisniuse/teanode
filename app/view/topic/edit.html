@@ -47,9 +47,16 @@
               <%});%>
             </select>
             <span id="topic_create_warn"></span>
-            <textarea autofocus class='span9' id='title' name='title' rows='1'
-                      placeholder="标题字数 10 字以上"
-                    ><%= typeof title !== 'undefined' && title || '' %></textarea>
+
+            <div class="topic_edit_title_warp">
+                <input autofocus 
+                class='title-edit-input'
+                id='title' 
+                name='title'
+                placeholder="标题字数 10 字以上"
+                value="<%= typeof title !== 'undefined' && title || '' %>"
+              />
+            </div>
 
             <div class='markdown_editor in_editor'>
               <div class='markdown_in_editor'>

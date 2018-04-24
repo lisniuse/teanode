@@ -30,12 +30,7 @@ class PageController extends Controller {
   # Disallow: /
 `;
   }
-
-  async api() {
-    let data = { pageTitle: 'API' };
-    await this.ctx.render('static/api', data);
-  }
-
+  
 }
 
 module.exports = PageController;

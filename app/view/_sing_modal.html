@@ -2,13 +2,13 @@
     <div class="Modal modal-dialog Modal--small SignUpModal">
         <div class="Modal-content">
             <div class="Modal-close App-backControl">
-                <button class="Button Button--icon Button--link hasIcon" id="close" type="button">
+                <button class="Button Button--icon Button--link hasIcon" id="close" type="button" @click="closeWindow()" >
                     <i class="icon fa fa-fw fa-times Button-icon"></i>
                 </button>
             </div>
-            <form action='/signup' method='post'>
+            <form :action="state==='reg' ? regAction : loginAction" method='post'>
                 <div class="Modal-header">
-                    <h3 class="App-titleControl App-titleControl--text">注册</h3>
+                    <h3 class="App-titleControl App-titleControl--text">{{state==='reg' ? '注册' : '登入'}}</h3>
                 </div>
                 <div class="Modal-alert"></div>
                 <div class="Modal-body">
@@ -18,7 +18,7 @@
                             <span class="Button-label">使用 GitHub 登入</span>
                         </button>
                     </div>
-                    <div class="Form Form--centered">
+                    <div class="Form Form--centered" v-if="state==='reg'">
                         <div class="Form-group">
                             <input class="FormControl" id="loginname" name="loginname" type="text" placeholder="用户名">
                         </div>
@@ -38,10 +38,29 @@
                             </button>
                         </div>
                     </div>
+                    <div class="Form Form--centered" v-if="state==='login'">
+                        <div class="Form-group">
+                            <input class="FormControl" id="name" name="name" type="text" placeholder="用户名">
+                        </div>
+                        <div class="Form-group">
+                            <input class="FormControl" id="pass" name="pass" type="password" placeholder="密码">
+                        </div>
+                        <input type='hidden' name='_csrf' value='<%= csrf %>' />
+                        <div class="Form-group">
+                            <button class="Button Button--primary Button--block" type="submit" title="注册">
+                                <span class="Button-label">{{state==='reg' ? '注册' : '登入'}}</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="Modal-footer">
+                <div class="Modal-footer" v-if="state==='reg'">
                     <p class="SignUpModal-logIn">已经注册过了？
-                        <a>登入</a>
+                        <a @click="state='login'">登入</a>
+                    </p>
+                </div>
+                <div class="Modal-footer" v-if="state==='login'">
+                    <p class="SignUpModal-logIn">还没有注册？
+                        <a @click="state='reg'">注册</a>
                     </p>
                 </div>
             </form>
@@ -51,13 +70,35 @@
 
 <script>
     $(function () {
-        $("#menuButtonReg").click(function (event) {
-            $("#loginRegModal").fadeToggle();
-        });
-        $("#loginRegModal").click(function (event) {
-            if (event.target.nodeName === "I" && event.target.parentNode.id === "close") {
-                $("#loginRegModal").fadeToggle();
+        window.vloginModal = new Vue({
+            el: '#loginRegModal',
+            data: {
+                state: 'reg',
+                regAction: '/signup',
+                loginAction: '/passport/local' 
+            },
+            created: function () {
+                let self = this;
+                $("#menuButtonReg").click(function (event) {
+                    self.state = 'reg';
+                    $("#loginRegModal").fadeToggle();
+                });
+                $("#menuButtonLogin").click(function (event) {
+                    self.state = 'login';
+                    $("#loginRegModal").fadeToggle();
+                });
+            },
+            methods: {
+                closeWindow: function() {
+                    $("#loginRegModal").fadeToggle();
+                }
             }
         });
+
+        // $("#loginRegModal").click(function (event) {
+        //     if (event.target.nodeName === "I" && event.target.parentNode.id === "close") {
+        //         $("#loginRegModal").fadeToggle();
+        //     }
+        // });
     });
 </script>

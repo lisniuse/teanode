@@ -50,7 +50,7 @@
     <div class="sub-menu"  onclick="showSubMenu('menu<%= topic.id %>')" >
         <i class="icon fa fa-ellipsis-v"></i>
         <ul class="Dropdown-menu dropdown-menu" id="menu<%= topic.id %>" onmouseleave="this.style.display = 'none';">
-          <% if (current_user._id.equals(topic.author_id)) { %>
+          <% if (current_user && current_user._id.equals(topic.author_id)) { %>
           <li class="item-subscription">
             <button class=" hasIcon" id="deleteTopic" onclick="deleteTopic('<%= topic.id %>')" type="button" title="Follow">
               <i class="icon fa fa-trash Button-icon"></i>

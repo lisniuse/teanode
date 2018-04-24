@@ -101,8 +101,6 @@ module.exports = app => {
   router.get('/faq', page.faq);
   router.get('/getstart', page.getstart);
   router.get('/robots.txt', page.robots);
-  router.get('/api', page.api);
-
   // rss
   router.get('/rss', rss.index);
 
