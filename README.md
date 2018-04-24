@@ -1,4 +1,4 @@
-# cnode
+# Teanode
 
 [![powered by Egg.js][egg-image]][egg]
 [![build status][travis-image]][travis-url]
@@ -83,3 +83,6 @@ $ npm stop
 - [Develop / Deploy with Docker](tutorials/Docker.md)
 
 [egg]: https://eggjs.org
+
+### Donations
+你的支持，是我不断前进的动力。
