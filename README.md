@@ -86,3 +86,7 @@ $ npm stop
 
 ### Donations
 你的支持，是我不断前进的动力。
+
+![微信二维码](https://raw.githubusercontent.com/lisniuse/teanode/master/donations/alipay.jpg =200x200)
+
+![微信二维码](https://raw.githubusercontent.com/lisniuse/teanode/master/donations/weixin.jpg =200x200)
