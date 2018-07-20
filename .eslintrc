@@ -1,9 +1,0 @@
-{
-  "extends": "eslint-config-egg",
-  "parserOptions": {
-    "ecmaVersion": 8,
-    "sourceType": "script",
-    "ecmaFeatures": {
-    }
-  }
-}
