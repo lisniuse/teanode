@@ -7,14 +7,17 @@
     "egg": "^2.2.1",
     "egg-alinode": "^2.0.1",
     "egg-mongoose": "^2.1.1",
+    "egg-redis": "^2.0.0",
     "egg-scripts": "^2.5.0",
     "egg-validate": "^1.0.0",
     "egg-view-ejs": "^2.0.0",
-    "egg-redis": "^2.0.0",
     "lodash": "^4.17.10",
     "markdown-it": "^8.4.1",
     "moment": "^2.22.2",
-    "uuid": "^3.3.2"
+    "nodemailer": "^4.6.7",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "uuid": "^3.3.2",
+    "validator": "^10.4.0"
   },
   "devDependencies": {
     "autod": "^3.0.1",
