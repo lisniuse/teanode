@@ -20,15 +20,18 @@ module.exports = app => {
             host: "", //站点域名
             sessionSecret: "", //用户加密因子
             allowSignUp: "", //是否允许直接注册，跳过邮箱验证
-            mailOpts: { //邮箱配置
-                host: 'smtp.126.com',
-                port: 25,
-                auth: {
-                    user: 'club@126.com',
-                    pass: 'club',
-                },
-                ignoreTLS: true,
-            }
+            installed: false, //是否安装过系统
+        }
+        
+        //邮件配置
+        email: {
+            host: 'smtp.126.com',
+            port: 25,
+            auth: {
+                user: 'club@126.com',
+                pass: 'club',
+            },
+            ignoreTLS: true,
         }
         //
         */

@@ -43,11 +43,11 @@ class UserController extends Controller {
         await this.service.cache.setVerCode(email, verCode);
 
         // 发送激活邮件
-        await service.mail.sendActiveMail(
-            email, 
-            `【${siteConfig.siteName}】尊重的用户，您的验证是：${verCode}。如非本人操作，请忽略本短信。`
-        );
-
+        await this.service.mail.sendVerCodeMail({
+            email: email,
+            title: `【${siteConfig.siteName}】邮箱验证码`,
+            content: `【${siteConfig.siteName}】尊重的用户，您的验证是：${verCode}。如非本人操作，请忽略本邮件。`
+        });
         
     }
 

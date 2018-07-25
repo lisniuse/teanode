@@ -2,10 +2,10 @@
 
 const Controller = require('egg').Controller;
 
-class SiteController extends Controller {
+class ConfigController extends Controller {
     async index() {
         this.ctx.body = 'hi, egg';
     }
 }
 
-module.exports = SiteController;
+module.exports = ConfigController;
