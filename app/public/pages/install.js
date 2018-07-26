@@ -35,7 +35,15 @@ $(function () {
         },
         methods: {
             installAction: function () {
-                console.log(this.form);
+                $.ajax({
+                    url: "/api/v1/install",
+                    method: "POST",
+                    data: this.form,
+                    success: function (res) {
+                        console.log(res);
+                    }
+                });
+                //console.log(this.form);
             }
         }
     })

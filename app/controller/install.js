@@ -8,12 +8,13 @@ class InstallController extends Controller {
     }
 
     async pageInstall() {
-        //this.ctx.body = '123';
         await this.ctx.render('/pages/install', {});
     }
 
     async apiInstall() {
-        
+        this.ctx.body = {
+            data: this.ctx.request.body
+        }
     }
 }
 

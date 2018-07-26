@@ -12,11 +12,11 @@ module.exports = app => {
     router.get('/', controller.home.index);
     //页面路由
     router.get('/install', controller.install.pageInstall);
-    
+
     //api路由
     router.get('/api/v1/user/get_email_vercode', controller.user.apiGetEmailValCode);
-    router.get('/api/v1/user/sinup', controller.user.apiSinup);
-    router.get('/api/v1/install', controller.install.apiInstall);
+    router.post('/api/v1/user/sinup', controller.user.apiSinup);
+    router.post('/api/v1/install', controller.install.apiInstall);
 };
 
 //请求码
