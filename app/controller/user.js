@@ -29,10 +29,10 @@ class UserController extends Controller {
 
         if ( users ) {
             ctx.status = 200;
-            ctx.body = [{
+            ctx.body = {
                 code: 101,
                 msg: "邮箱已被使用。"
-            }];
+            };
             return;
         }
 

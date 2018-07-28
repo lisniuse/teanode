@@ -1,0 +1,65 @@
+.tea-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 60px;
+}
+
+.tea-clearfix:after {
+    content: "";
+    clear: both;
+    display: block;
+    overflow: hidden;
+    font-size: 0;
+    height: 0;
+}
+
+.tea-login {
+    float: left;
+    width: 120px;
+    height: 60px;
+    text-align: left;
+    line-height: 60px;
+    font-size: 20px !important;
+}
+
+.tea-menu {
+    float: left;
+}
+
+.tea-fright {
+    float: right;
+}
+
+.tea-checkpop {
+    width: 400px;
+    box-sizing: border-box;
+}
+
+.tea-form-label {
+    width: auto !important;
+}
+
+.tea-input-block {
+    margin-left: 70px !important;
+}
+
+.tea-checkpop-foot {
+    width: 100%;
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+    background-color: #f6f6f6;
+    border-top: 1px solid #ebebeb;
+}
+
+.tea-checkpop a {
+   color: #01AAED;
+}
+
+.tea-checkpop-form {
+    padding: 20px;
+}
+

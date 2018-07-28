@@ -14,7 +14,7 @@ module.exports = app => {
     router.get('/install', controller.install.pageInstall);
 
     //api路由
-    router.get('/api/v1/user/get_email_vercode', controller.user.apiGetEmailValCode);
+    router.post('/api/v1/user/get_email_vercode', controller.user.apiGetEmailValCode);
     router.post('/api/v1/user/sinup', controller.user.apiSinup);
     router.post('/api/v1/install', controller.install.apiInstall);
 };
@@ -25,10 +25,26 @@ errorCode: [
   {
     code: 0,
     msg: "ok"
+  },
+  {
+    code: 2,
+    msg: "未知错误。"
+  },
+  {
+    code: 3,
+    msg: "论坛安装失败。"
+  },
+  {
+    code: 4,
+    msg: "论坛已经安装过了。"
   }
   {
     code: 101,
     msg: "邮箱已被使用。"
+  },
+  {
+    code: 102,
+    msg: "参数错误。"
   }
 ]
 */

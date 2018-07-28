@@ -22,7 +22,7 @@ module.exports = app => {
         createTime: { type: Number },
         updateTime: { type: Number },
 
-        active: { type: Boolean, default: true }, //是否已经激活
+        active: { type: Boolean, default: false }, //是否已经激活
     });
 
     UserSchema.index({ email: 1 }, { unique: true });

@@ -9,28 +9,26 @@ module.exports = app => {
      */
     const ConfigSchema = new Schema({
         name: { type: String }, //配置名称
-        content: { type: String }, //配置信息
+        content: { type: Object }, //配置信息
         /*
         //站点配置
         site: {
             name: "", //站点名称
             description: "", //站点描述
+            keywords: "", //站点关键字
             logo: "", //站点Logo
             icon: "", //站点图标
-            host: "", //站点域名
+            domain: "", //站点域名
             sessionSecret: "", //用户加密因子
             allowSignUp: "", //是否允许直接注册，跳过邮箱验证
             installed: false, //是否安装过系统
-        }
-        
+        },
         //邮件配置
         email: {
             host: 'smtp.126.com',
             port: 25,
-            auth: {
-                user: 'club@126.com',
-                pass: 'club',
-            },
+            authUser: 'club@126.com',
+            authPass: 'club',
             ignoreTLS: true,
         }
         //
