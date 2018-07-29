@@ -3,7 +3,6 @@
 module.exports = () => {
     //判断网站是否安装
     return async function (ctx, next) {
-        console.log("ip:", ctx.request.ip);
         const goInstallPage = function () {
             ctx.redirect(`/install.html`);
         }
