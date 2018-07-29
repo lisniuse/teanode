@@ -13,16 +13,16 @@ $(function () {
         data: function() {
             return {
                 form: {
-                    adminUsername: "123123@qq.com",
+                    adminUsername: "user@qq.com",
                     adminPassword: "12345689",
-                    emailHost: "123123",
-                    emailPort: "1234",
-                    emailUsername: "123",
-                    emailPassword: "123",
-                    siteTitle: "123",
-                    siteDesc: "123",
-                    siteDomain: "123",
-                    sessionSecret: "123"
+                    emailHost: "smtp.qq.com",
+                    emailProtocol: "smtps",
+                    emailUsername: "test@qq.com",
+                    emailPassword: "123456789",
+                    siteTitle: "Teanode",
+                    siteDesc: "Teanode 开源论坛社区",
+                    siteDomain: "www.teanode.org",
+                    sessionSecret: "ddf4tfg"
                 }
             }
         },

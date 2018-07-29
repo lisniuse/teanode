@@ -73,9 +73,9 @@
                                 </div>
                             </div>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">服务器端口</label>
+                                <label class="layui-form-label">服务器协议</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="emailPort" v-model="form.emailPort" lay-verify="required|number" autocomplete="off" placeholder="请输入邮件服务器端口" class="layui-input">
+                                    <input type="text" name="emailProtocol" v-model="form.emailProtocol" lay-verify="required" autocomplete="off" placeholder="请输入邮件服务器协议，例如：smtps" class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-form-item">
@@ -147,7 +147,7 @@
         </form>
     </div>
 
-    <script src="/public/pages/install.js"></script>
+    <script src="/public/install/pages/install.js"></script>
 </body>
 
 </html>

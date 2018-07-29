@@ -74,7 +74,7 @@ var CheckPop = function (options) {
                         '</div>' + 
                     '</div>' +
                     '<div class="layui-inline" style="margin-right: 0px;">' + 
-                        '<button type="button" class="layui-btn layui-btn-normal" @click="getVerCode()">获取验证码</button>' +
+                        '<button type="button" style="width:106px" class="layui-btn layui-btn-normal" :class="{\'layui-btn-disabled\': countdown < this.maxCount, \'layui-btn-normal\': countdown === this.maxCount}" @click="getVerCode()">{{countdown < this.maxCount ? countdown : \'获取验证码\'}}</button>' +
                     '</div>' +
                 '</div>' +
                 '<div style="width: 100%;">' + 
@@ -126,7 +126,7 @@ var CheckPop = function (options) {
                         '</div>' + 
                     '</div>' +
                     '<div class="layui-inline" style="margin-right: 0px;">' + 
-                        '<button type="button" class="layui-btn layui-btn-normal" @click="getVerCode()">获取验证码</button>' +
+                        '<button type="button" style="width:106px" class="layui-btn layui-btn-normal" :class="{\'layui-btn-disabled\': countdown < this.maxCount, \'layui-btn-normal\': countdown === this.maxCount}" @click="getVerCode()">{{countdown < this.maxCount ? countdown : \'获取验证码\'}}</button>' +
                     '</div>' +
                 '</div>' +
                 '<div style="width: 100%;">' + 
@@ -147,6 +147,8 @@ var CheckPop = function (options) {
             data: function () {
                 return {
                     type: type,
+                    countdown: 80,
+                    maxCount: 80,
                     form: {
                         email: "",
                         password: "",
@@ -172,7 +174,7 @@ var CheckPop = function (options) {
                 }
             },
             mounted() {
-                let that = this;
+                var that = this;
                 layui.form.on('submit(login)', function(data) {
                     that.login(); //移交给vue处理
                     return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
@@ -191,19 +193,50 @@ var CheckPop = function (options) {
                     
                 },
                 reg: function () {
+                    var that = this;
                     if (this.form.password !== this.form.repassword) {
                         layer.msg("两次输入的密码不相同", {icon: 5});
                         return;
                     }
+                    $.ajax({
+                        url: "/api/v1/user/sinup",
+                        method: "POST",
+                        data: {
+                            email: this.form.email,
+                            password: this.form.password,
+                            repassword: this.form.repassword,
+                            vercode: this.form.vercode,
+                        },
+                        success: function (res) {
+                            if ( res.code > 0 )  {
+                                layer.msg(res.msg, {icon: 5});
+                            } else {
+                                layer.msg("注册成功，请登陆。", {icon: 1});
+                                setTimeout(function () {
+                                    that.type = "login";
+                                }, 2000);
+                            }
+                        }
+                    });
                 },
                 forget: function () {
 
                 },
                 getVerCode: function () {
+                    var that = this;
+                    if  ( that.countdown < that.maxCount ) return;
                     if ( !validator.isEmail(this.form.email) ) {
                         layer.msg("邮箱格式不正确", {icon: 5});
                         return;
                     }
+                    that.countdown--;
+                    var timer = setInterval(function() {
+                        that.countdown--;
+                        if (countdown <= 0) {
+                            window.clearInterval(timer);
+                            countdown = that.maxCount;
+                        }
+                    }, 1000);
                     $.ajax({
                         url: "/api/v1/user/get_email_vercode",
                         method: "POST",
@@ -214,7 +247,6 @@ var CheckPop = function (options) {
                             if ( res.code > 0 )  {
                                 layer.msg(res.msg, {icon: 5});
                             } else {
-
                             }
                         }
                     });

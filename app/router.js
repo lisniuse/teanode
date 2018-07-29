@@ -10,8 +10,11 @@ module.exports = app => {
         controller
     } = app;
     router.get('/', controller.home.index);
+    router.get('/index.html', controller.home.index);
+    router.get('/home.html', controller.home.index);
+
     //页面路由
-    router.get('/install', controller.install.pageInstall);
+    router.get('/install.html', controller.install.pageInstall);
 
     //api路由
     router.post('/api/v1/user/get_email_vercode', controller.user.apiGetEmailValCode);
@@ -45,6 +48,10 @@ errorCode: [
   {
     code: 102,
     msg: "参数错误。"
+  },
+  {
+    code: 103,
+    msg: "邮箱验证码错误"
   }
 ]
 */

@@ -2,21 +2,31 @@
 
 const Service = require('egg').Service;
 const mailer = require('nodemailer');
-const smtpTransport = require('nodemailer-smtp-transport');
 
 class MailService extends Service {
     async sendMail(data) {
         const {
+            ctx,
             config,
             logger
         } = this;
 
-        if (config.debug) {
-            return;
+        const emailConfig = ctx.locals.webConfig.email;
+        const mailOpts = {
+            host: emailConfig.host,
+            protocol: emailConfig.protocol,
+            auth: {
+              user: emailConfig.authUser,
+              pass: emailConfig.authPass,
+            },
+            ignoreTLS: emailConfig.ignoreTLS
         }
 
-        const transporter = mailer.createTransport(smtpTransport(config.mail_opts));
-
+        //smtpTransport(mailOpts)
+        let opts = `${mailOpts.protocol}://${mailOpts.auth.user}:${mailOpts.auth.pass}@${mailOpts.host}`;
+        console.log(opts);
+        const transporter = mailer.createTransport(opts);
+        //smtps://<发送邮箱>:<授权码>@smtp.qq.com
         for (let i = 1; i < 6; i++) {
             try {
                 await transporter.sendMail(data);
@@ -32,7 +42,20 @@ class MailService extends Service {
         }
     }
 
-    async sendVerCodeMail(options) {
+    async sendVerCodeMail(options = {}) {
+        const {
+            ctx,
+            config
+        } = this;
+
+        const siteConfig = ctx.locals.webConfig.site;
+        const emailConfig = ctx.locals.webConfig.email;
+
+        const from = `${siteConfig.name} <${emailConfig.authUser}>`;
+        const to = options.email;
+        const subject = options.title;
+        const html = `<p>${options.content}</p>`;
+
         await this.sendMail({
             from,
             to,

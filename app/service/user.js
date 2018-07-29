@@ -8,7 +8,9 @@ class UserService extends Service {
      * 新建用户
      */
     async create(userObj) {
+        //密码加密
         userObj.password = this.ctx.helper.bhash(userObj.password);
+        
         const user = new this.ctx.model.User();
         for (const key in userObj) {
             user[key] = userObj[key];

@@ -41,8 +41,6 @@ class InstallController extends Controller {
             msg = '邮箱不合法。';
         } else if ( !validator.isLength(parameters.adminPassword, {min: 8, max: 16})) {
             msg = '密码必须8到16位，且不能出现空格。';
-        } else if ( !validator.isPort(parameters.emailPort)) {
-            msg = '端口格式不正确。';
         }
         // END 验证信息的正确性
         if (msg) {
@@ -81,7 +79,7 @@ class InstallController extends Controller {
             name: "email",
             content: {
                 host: parameters.emailHost,
-                port: parameters.emailPort,
+                protocol: parameters.emailProtocol,
                 authUser: parameters.emailUsername,
                 authPass: parameters.emailPassword,
                 ignoreTLS: true
