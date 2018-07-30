@@ -48,7 +48,6 @@ class UserController extends Controller {
             path: "/api/v1/user/get_email_vercode",
             time: 1000 * 60
         });
-
   
         // 发送激活邮件
         await this.service.mail.sendVerCodeMail({
@@ -63,8 +62,94 @@ class UserController extends Controller {
         }
     }
 
+    //登录API（仅作为用户名密码校验使用）
+    async apiSignin() {
+        const {
+            ctx,
+            service,
+            config
+        } = this;
+
+        //将当前的ip信息添加到防火墙中并禁止该用户3秒内再次请求该地址。
+        await this.service.cache.setBlackList({
+            ip: ctx.request.ip,
+            path: "/api/v1/user/signin",
+            time: 1000 * 3
+        });
+        
+        const parameters = {};
+        Object.keys(ctx.request.body).forEach(function (key) {
+            parameters[key] = validator.trim(ctx.request.body[key] || '');
+        });
+        ['email', 
+        'password']
+        .forEach(function (key) {
+            if ( parameters[key] === undefined ) parameters[key] = "";
+        });
+        let msg;
+        // 验证信息的正确性
+        if (Object.keys(parameters).some(key => {
+            return parameters[key] === '';
+        })) {
+            msg = '参数不正确';
+        } else if (!validator.isEmail(parameters.email)) {
+            msg = '邮箱不合法';
+        }
+        // END 验证信息的正确性
+
+        if (msg) {
+            ctx.status = 200;
+            ctx.body = {
+                code: 100,
+                msg: msg
+            }
+            return;
+        }
+
+        const user = await ctx.service.user.getUserByMail(parameters.email);
+
+        // 用户不存在
+        if (!user) {
+            ctx.status = 200;
+            ctx.body = {
+                code: 100,
+                msg: "用户不存在"
+            }
+            return;
+        }
+
+        const passhash = user.password;
+        const equal = ctx.helper.bcompare(parameters.password, passhash);
+
+        // 密码不匹配
+        if (!equal) {
+            ctx.status = 200;
+            ctx.body = {
+                code: 100,
+                msg: "密码不正确"
+            }
+            return;
+        }
+
+        // 用户未验证
+        if (!user.active) {
+            ctx.status = 200;
+            ctx.body = {
+                code: 100,
+                msg: "用户未验证"
+            }
+            return;
+        }
+
+        ctx.status = 200;
+        ctx.body = {
+            code: 0,
+            msg: "ok"
+        }
+    }
+
     //注册操作
-    async apiSinup() {
+    async apiSignup() {
         const {
             ctx,
             service,
@@ -99,7 +184,7 @@ class UserController extends Controller {
         if (msg) {
             ctx.status = 200;
             ctx.body = {
-                code: 101,
+                code: 100,
                 msg: msg
             }
             return;
@@ -138,6 +223,7 @@ class UserController extends Controller {
             password: parameters.password,
             active: true
         });
+
         if ( userRes ) {
             ctx.body = {
                 code: 0,

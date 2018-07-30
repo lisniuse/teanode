@@ -9,16 +9,24 @@ module.exports = app => {
         router,
         controller
     } = app;
+
+    const localStrategy = app.passport.authenticate('local', {
+      successRedirect: '/',
+      failureRedirect: '/',
+    });
+
     router.get('/', controller.home.index);
     router.get('/index.html', controller.home.index);
     router.get('/home.html', controller.home.index);
 
     //页面路由
     router.get('/install.html', controller.install.pageInstall);
+    router.post('/passport/local', localStrategy);
 
     //api路由
     router.post('/api/v1/user/get_email_vercode', controller.user.apiGetEmailValCode);
-    router.post('/api/v1/user/sinup', controller.user.apiSinup);
+    router.post('/api/v1/user/signup', controller.user.apiSignup);
+    router.post('/api/v1/user/signin', controller.user.apiSignin);
     router.post('/api/v1/install', controller.install.apiInstall);
 };
 
@@ -40,6 +48,10 @@ errorCode: [
   {
     code: 4,
     msg: "论坛已经安装过了。"
+  }
+  {
+    code: 100,
+    msg: "参数错误"
   }
   {
     code: 101,

@@ -1,11 +1,11 @@
 'use strict';
 
 module.exports = () => {
+    
     /**
      * 判断当前地址是否应该屏蔽当前ip，如果屏蔽返回 true
      * @param {Object} options 
      */
-
     const check = function (options = "") {
         if ( options === "" ) return false;
         const { blackList, ip, path } = options;
@@ -22,9 +22,9 @@ module.exports = () => {
             ip: ctx.request.ip,
             path: ctx.request.path
         }) ) {
-            ctx.status = 403;
+            ctx.status = 200;
             ctx.body = {
-                code: 0,
+                code: 2,
                 msg: "你的操作过于频繁"
             }
             return;

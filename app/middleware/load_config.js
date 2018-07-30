@@ -9,6 +9,7 @@ module.exports = () => {
             site: siteConfig ? siteConfig.content : {} ,
             email: emailConfig ? emailConfig.content : {}
         }
+        ctx.locals.csrf = ctx.csrf;
         await next();
     };
 };

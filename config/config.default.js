@@ -54,5 +54,11 @@ module.exports = appInfo => {
             db: process.env.EGG_REDIS_DB || '0',
         },
     };
+
+    config.passportLocal = {
+        usernameField: 'email',
+        passwordField: 'password',
+    };
+
     return config;
 };

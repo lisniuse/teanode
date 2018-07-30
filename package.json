@@ -8,6 +8,8 @@
     "egg": "^2.2.1",
     "egg-alinode": "^2.0.1",
     "egg-mongoose": "^3.1.0",
+    "egg-passport": "^2.0.1",
+    "egg-passport-local": "^1.2.1",
     "egg-redis": "^2.0.0",
     "egg-scripts": "^2.5.0",
     "egg-validate": "^1.0.0",
@@ -28,6 +30,7 @@
     "egg-mock": "^3.14.0",
     "eslint": "^4.11.0",
     "eslint-config-egg": "^6.0.0",
+    "reqman": "^0.0.3",
     "webstorm-disable-index": "^1.2.0"
   },
   "engines": {

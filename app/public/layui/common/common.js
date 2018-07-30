@@ -5,8 +5,7 @@ utils = {};
 layui.use('element', function() {
     var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
     //监听导航点击
-    element.on('nav(demo)', function(elem){
-        //console.log(elem)
+    element.on('nav(demo)', function(elem) {
         layer.msg(elem.text());
     });
 });
@@ -83,7 +82,8 @@ var CheckPop = function (options) {
             '</form>' + 
         '</div>' + 
         '<div id="loginPop" class="tea-checkpop-form" v-if="type===\'login\'" >' + 
-            '<form class="layui-form" action="">' +
+            '<form id="loginForm" class="layui-form" method="post" action="/passport/local">' +
+                '<input type="hidden" name="_csrf" value="" v-model="csrfToken" />' +
                 '<div class="layui-form-item">' +
                     '<label class="layui-form-label tea-form-label">邮箱</label>' + 
                     '<div class="layui-input-block tea-input-block">' +
@@ -97,7 +97,7 @@ var CheckPop = function (options) {
                     '</div>' + 
                 '</div>' +
                 '<div style="width: 100%">' + 
-                    '<button class="layui-btn layui-btn-fluid layui-btn-normal" lay-submit="" lay-filter="login"  ><i class="fa fa-user-circle"></i> 登陆</button>' + 
+                    '<button class="layui-btn layui-btn-fluid layui-btn-normal" lay-submit="" lay-filter="login" ><i class="fa fa-user-circle"></i> 登录</button>' + 
                 '</div>' + 
                 '<div style="width: 100%; text-align:center; height: 40px; line-height: 60px;">' + 
                     '<a href="javascript:void(0);" @click="type=\'forget\'">忘记密码？</a>' + 
@@ -146,9 +146,11 @@ var CheckPop = function (options) {
             el: ".tea-checkpop",
             data: function () {
                 return {
+                    isDischarged: false,
                     type: type,
                     countdown: 80,
                     maxCount: 80,
+                    csrfToken: $("meta[name='csrf-token']")[0].getAttribute("content"),
                     form: {
                         email: "",
                         password: "",
@@ -159,7 +161,6 @@ var CheckPop = function (options) {
             },
             watch: {
                 'type': function (val) {
-                    console.log(val);
                     switch(val) {
                         case 'reg':
                             layer.title("注册", layerIndex);
@@ -176,8 +177,10 @@ var CheckPop = function (options) {
             mounted() {
                 var that = this;
                 layui.form.on('submit(login)', function(data) {
-                    that.login(); //移交给vue处理
-                    return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+                    if ( that.isDischarged === false ) {
+                        that.login(); //移交给vue处理
+                        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+                    }
                 });
                 layui.form.on('submit(reg)', function(data) {
                     that.reg(); //移交给vue处理
@@ -190,7 +193,23 @@ var CheckPop = function (options) {
             },
             methods: {
                 login: function () {
-                    
+                    let that = this;
+                    $.ajax({
+                        url: "/api/v1/user/signin",
+                        method: "post",
+                        data: {
+                            email: this.form.email,
+                            password: this.form.password
+                        },
+                        success: function (res) {
+                            if (res.code > 0 ) {
+                                layer.msg(res.msg, {icon: 5});
+                            } else {
+                                that.isDischarged = true;
+                                $("button[lay-filter='login']").click();
+                            }
+                        }
+                    });
                 },
                 reg: function () {
                     var that = this;
@@ -199,7 +218,7 @@ var CheckPop = function (options) {
                         return;
                     }
                     $.ajax({
-                        url: "/api/v1/user/sinup",
+                        url: "/api/v1/user/signup",
                         method: "POST",
                         data: {
                             email: this.form.email,
