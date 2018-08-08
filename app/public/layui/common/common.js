@@ -251,9 +251,9 @@ var CheckPop = function (options) {
                     that.countdown--;
                     var timer = setInterval(function() {
                         that.countdown--;
-                        if (countdown <= 0) {
+                        if ( that.countdown <= 0) {
                             window.clearInterval(timer);
-                            countdown = that.maxCount;
+                            that.countdown = that.maxCount;
                         }
                     }, 1000);
                     $.ajax({
@@ -263,9 +263,11 @@ var CheckPop = function (options) {
                             email: this.form.email
                         },
                         success: function (res) {
+                            console.log(res);
                             if ( res.code > 0 )  {
                                 layer.msg(res.msg, {icon: 5});
                             } else {
+                                layer.msg("验证码已经发送到您的邮箱里了，请查看。", {icon: 1});
                             }
                         }
                     });

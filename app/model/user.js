@@ -14,6 +14,9 @@ module.exports = app => {
         url: { type: String }, //网址（可以是个人网站也可以是自己编辑过的WIKI）
         location: { type: String }, //所在地
         signature: { type: String }, //个人签名
+        sex: { type: Number, default: 1 }, //性别 1男、2女
+        age: { type: Number, default: 18}, //年龄
+        birthday: { type: Number }, //生日
         avatar: { type: String }, //头像
         power: { type: Array }, //权限
         score: { type: Number, default: 0 }, //积分

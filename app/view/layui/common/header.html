@@ -9,6 +9,7 @@
                     <a href="/">论坛首页</a>
                 </li>
             </div>
+            <% if( !user._id ) { %>
             <div class="tea-fright">
                 <li class="layui-nav-item">
                     <a href="javascript:void(0);"><i class="fa fa-registered"></i> 注册</a>
@@ -17,6 +18,9 @@
                     <a href="javascript:void(0);"><i class="fa fa-user-circle"></i> 登录</a>
                 </li>
             </div>
+            <% } else { %>
+                
+            <% } %>
         </ul>
     </div>
 </div>

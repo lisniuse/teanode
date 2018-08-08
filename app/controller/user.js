@@ -36,7 +36,7 @@ class UserController extends Controller {
             return;
         }
 
-        const siteConfig = ctx.locals.webConfig.site
+        const siteConfig = ctx.locals.webConfig.site;
         const verCode = ctx.helper.randNum(100000, 999999);
 
         //写入缓存 
@@ -217,8 +217,14 @@ class UserController extends Controller {
         //无报错移除该邮箱的验证码缓存
         await this.service.cache.removeVerCodeByEmail(parameters.email);
 
+        const siteConfig = ctx.locals.webConfig.site;
+
+        const userCount = await this.service.user.count({});
+
         //正式创建该用户
         const userRes = await this.service.user.create({
+            nickname: `第${userCount + 1}位${siteConfig.name}友`,
+            avatar: "/public/layui/res/images/avatar/default.jpg",
             email: parameters.email,
             password: parameters.password,
             active: true
