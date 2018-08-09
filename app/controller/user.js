@@ -148,6 +148,14 @@ class UserController extends Controller {
         }
     }
 
+    //登出
+    async signout() {
+        const { ctx } = this;
+        ctx.session = null;
+        ctx.logout();
+        ctx.redirect('/');
+    }
+
     //注册操作
     async apiSignup() {
         const {

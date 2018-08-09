@@ -1,8 +1,11 @@
 <div class="fly-panel fly-column">
   <div class="layui-container">
     <ul class="layui-clear">
-    	<li class="layui-hide-xs {{ d.nav === 'fly' ? ' layui-this' : '' }}"><a href="/">首页</a></li>
-      {{# for(var classes in lay.base.classes){ }}
+        <li class="layui-hide-xs <% if ( '/index.html' === webConfig.currentUrl) { %> layui-this <% } %>"><a href="/index.html">首页</a></li>
+      <% webConfig.categoryConfig.forEach(function(item) { %>
+      <li class="layui-hide-xs <% if (('/category/' + item.alias + ".html") === webConfig.currentUrl) { %> layui-this<% } %>"><a href="<%- '/category/' + item.alias + ".html" %>"><%- item.name %></a></li>
+      <% }); %>
+      <!-- {{# for(var classes in lay.base.classes){ }}
         <li {{ (d.params && d.params.column === lay.base.classes[classes].alias) ? 'class="layui-this"' : '' }}>
           <a href="/column/{{ lay.base.classes[classes].alias }}/">
             {{ lay.base.classes[classes].title }}
@@ -11,13 +14,13 @@
             {{# } }}
           </a>
         </li>
-      {{# } }}
+      {{# } }} -->
 
-      {{# if(user.id){ }}
+      <% if( user.id ) { %>
       <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li>
       <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="/user/">我发表的贴</a></li>
       <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="/user/#collection">我收藏的贴</a></li>
-      {{# } }}
+      <% } %>
     </ul>
 
     <div class="fly-column-right layui-hide-xs">

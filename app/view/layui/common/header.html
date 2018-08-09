@@ -5,9 +5,11 @@
                 Teanode
             </div>
             <div class="tea-menu">
-                <li class="layui-nav-item layui-this">
-                    <a href="/">论坛首页</a>
+                <% webConfig.navConfig.navList.forEach(function(item) { %>
+                <li class="layui-nav-item <% if ( item.url === webConfig.currentUrl) { %>layui-this<% } %>">
+                    <a href="<%- item.url %>" target="<%- item.target %>"><%- item.name %></a>
                 </li>
+                <% }); %>
             </div>
             <% if( !user._id ) { %>
             <div class="tea-fright">
@@ -19,7 +21,21 @@
                 </li>
             </div>
             <% } else { %>
-                
+            <div class="tea-fright"> 
+                <li class="layui-nav-item">
+                    <a class="fly-nav-avatar" href="javascript:;">
+                        <cite class="layui-hide-xs"><%- user.nickname %></cite>
+                        <img src="<%- user.avatar %>">
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="user/set.html"><i class="fa fa-cog" style="margin-left: 1px;"></i>基本设置</a></dd>
+                        <dd><a href="user/message.html"><i class="fa fa-bell-o" ></i>我的消息</a></dd>
+                        <dd><a href="user/home.html"><i class="fa fa-home"></i>我的主页</a></dd>
+                        <hr style="margin: 5px 0;">
+                        <dd><a href="/user/logout.html">退出</a></dd>
+                    </dl>
+                </li>
+            </div>
             <% } %>
         </ul>
     </div>

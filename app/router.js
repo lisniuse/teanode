@@ -15,13 +15,19 @@ module.exports = app => {
       failureRedirect: '/',
     });
 
-    router.get('/', controller.home.index);
-    router.get('/index.html', controller.home.index);
-    router.get('/home.html', controller.home.index);
+    //首页路由
+    router.redirect('/', '/index.html', 302);
+    router.get('/index.html', controller.home.index); //首页
+    
+    //论坛板块
+    router.get('/category/:categoryName', controller.category.index); //访问板块
 
-    //页面路由
-    router.get('/install.html', controller.install.pageInstall);
-    router.post('/passport/local', localStrategy);
+    //其他页面
+    router.get('/install.html', controller.install.pageInstall); //安装页
+    router.get('/user/logout.html', controller.user.signout); //登出页
+    router.get('/404.html', controller.error.notfound); //404
+    router.post('/passport/local', localStrategy); //登录页
+
 
     //api路由
     router.post('/api/v1/user/get_email_vercode', controller.user.apiGetEmailValCode);

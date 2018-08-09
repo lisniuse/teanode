@@ -58,6 +58,7 @@ class InstallController extends Controller {
             power: ["super"],
         });
 
+        //把站点配置信息写入数据库
         let siteConfigResult = await service.config.create({
             name: "site",
             content: {
@@ -75,6 +76,7 @@ class InstallController extends Controller {
             }
         });
 
+        //把邮件信息写入数据库
         let emailConfigResult = await service.config.create({
             name: "email",
             content: {
@@ -86,9 +88,51 @@ class InstallController extends Controller {
             }
         });
 
+        //把导航数据写入数据库
+        let navConfigResult = await service.config.create({
+            name: "nav",
+            content: {
+                navList: [{
+                    name: "论坛首页",
+                    target: "_self", //打开方式
+                    url: "/index.html"
+                }, {
+                    name: "关于",
+                    target: "_self", //打开方式
+                    url: "/about.html"
+                }]
+            }
+        });
+
+        //把板块信息写入数据库
+        let categoryConfigResult = await service.category.create([{
+            name: "提问",
+            alias: "question",
+            order: 1,
+        }, {
+            name: "分享",
+            alias: "share",
+            order: 2,
+        }, {
+            name: "讨论",
+            alias: "discuss",
+            order: 3,
+        }, {
+            name: "建议",
+            alias: "suggest",
+            order: 4,
+        }, {
+            name: "公告",
+            alias: "notice",
+            order: 5,
+        }]);
+
         if ( administratorAccountResult && 
             emailConfigResult && 
-            siteConfigResult) {
+            siteConfigResult &&
+            navConfigResult &&
+            categoryConfigResult.length
+        ) {
             ctx.status = 200;
             ctx.body = {
                 code: 0,

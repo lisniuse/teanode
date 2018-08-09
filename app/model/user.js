@@ -20,7 +20,9 @@ module.exports = app => {
         avatar: { type: String }, //头像
         power: { type: Array }, //权限
         score: { type: Number, default: 0 }, //积分
-        starPropertys: { type: Array }, //关注的IP
+
+        starArticleIds: { type: Array }, //点赞过的文章
+        collArticleIds: { type: Array }, //收藏的文章
 
         createTime: { type: Number },
         updateTime: { type: Number },

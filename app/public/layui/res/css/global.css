@@ -147,7 +147,7 @@ pre{padding: 10px 15px; margin: 10px 0; font-size: 12px; border-left: 6px solid 
 .fly-nav-avatar img{width: 36px; height: 36px; margin-left: 10px; border-radius: 100%;}
 .fly-nav-avatar  .icon-renzheng{font-size: 16px; top: 1px;}
 .fly-nav-avatar .fly-badge-vip{position: relative; margin-left: 10px;}
-.fly-nav-user .layui-nav-child a i{position: relative; top: 2px; margin-right: 10px; font-size: 26px;}
+.layui-nav .layui-nav-child a i{position: relative; top: 2px; margin-right: 10px; font-size: 20px;}
 
 .fly-nav-msg{position:absolute; top: 50%; left: -25px; height: 20px; line-height: 20px; margin-top: -10px; padding:0 6px; background-color: #FF7200; color: #fff; border-radius: 2px;}
 .fly-nav-msg:hover{color:#fff;}

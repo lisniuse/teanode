@@ -58,6 +58,8 @@ module.exports = app => {
     app.passport.deserializeUser(async (ctx, user) => {
         if (user) {
             const siteConfig = await ctx.service.config.findByConfigName("site");
+            
+            if ( siteConfig === null ) return user;
             const auth_token = ctx.cookies.get(siteConfig.content.name, {
                 signed: true
             });

@@ -63,3 +63,6 @@
     padding: 20px;
 }
 
+.layui-nav .layui-nav-item dl dd a {
+    padding: 0 10px;
+}

@@ -6,19 +6,23 @@ module.exports = () => {
         const goInstallPage = function () {
             ctx.redirect(`/install.html`);
         }
+        const siteConfig = ctx.locals.webConfig.site; //await ctx.service.config.findByConfigName("site");
         let apiRoute = ctx.request.path.substring(0, 4);
         let staticRoute = ctx.request.path.substring(0, 8);
         let routeName = ctx.request.path;
+        
         if ( apiRoute !== "/api" &&
             routeName !== "/install.html" &&
             staticRoute !== "/public/"
         ) {
-            if ( ctx.locals.webConfig.site ) {
-                if ( !ctx.locals.webConfig.site.installed ) {
+            if ( siteConfig ) {
+                if ( !siteConfig.installed ) {
                     goInstallPage();
+                    return
                 }
             } else {
                 goInstallPage();
+                return
             }
         }
         await next();
