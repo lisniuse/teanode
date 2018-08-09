@@ -28,11 +28,12 @@
                         <img src="<%- user.avatar %>">
                     </a>
                     <dl class="layui-nav-child">
-                        <dd><a href="user/set.html"><i class="fa fa-cog" style="margin-left: 1px;"></i>基本设置</a></dd>
-                        <dd><a href="user/message.html"><i class="fa fa-bell-o" ></i>我的消息</a></dd>
-                        <dd><a href="user/home.html"><i class="fa fa-home"></i>我的主页</a></dd>
+                        <dd><a href="/user/home/<%- user.id %>.html"><i class="fa fa-home" style="font-size: 24px; margin-right: 8px; margin-left: -1px; top: 3px;" ></i>我的主页</a></dd>
+                        <dd><a href="/user/personal.html"><i class="fa fa-user-circle-o" style="margin-right: 8px;"></i>个人中心</a></dd>
                         <hr style="margin: 5px 0;">
-                        <dd><a href="/user/logout.html">退出</a></dd>
+                        <dd><a href="/user/message.html"><i class="fa fa-bell-o" ></i>我的消息</a></dd>
+                        <hr style="margin: 5px 0;">
+                        <dd><a href="/user/logout.html"><i class="fa fa-sign-out" style="margin-left: 2px;"></i>退出</a></dd>
                     </dl>
                 </li>
             </div>

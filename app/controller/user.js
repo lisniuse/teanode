@@ -7,6 +7,33 @@ const Controller = require('egg').Controller;
 
 class UserController extends Controller {
 
+    //用户个人主页
+    async pageHome() {
+        const { ctx, service, config } = this;
+        ctx.body = {
+            code: 0,
+            data: "ok"
+        }
+    }
+
+    //用户个人中心页面
+    async pagePersonal() {
+        const { ctx, service, config } = this;
+        ctx.body = {
+            code: 0,
+            data: "ok"
+        }
+    }
+
+    //用户个人消息页面
+    async pageMessage() {
+        const { ctx, service, config } = this;
+        ctx.body = {
+            code: 0,
+            data: "ok"
+        }
+    }
+
     //获取邮箱验证码
     async apiGetEmailValCode() {
         const {

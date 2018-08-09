@@ -24,6 +24,9 @@ module.exports = app => {
         starArticleIds: { type: Array }, //点赞过的文章
         collArticleIds: { type: Array }, //收藏的文章
 
+        followers: { type: Array }, //关注者
+        signatureDays: { type: Number }, //连续签到天数
+
         createTime: { type: Number },
         updateTime: { type: Number },
 

@@ -28,6 +28,10 @@ module.exports = app => {
     router.get('/404.html', controller.error.notfound); //404
     router.post('/passport/local', localStrategy); //登录页
 
+    //用户页面
+    router.get('/user/home/:userId', controller.user.pageHome); //用户个人主页
+    router.get('/user/personal.html', controller.user.pagePersonal); //用户个人主页
+    router.get('/user/message.html', controller.user.pageMessage); //用户的消息页
 
     //api路由
     router.post('/api/v1/user/get_email_vercode', controller.user.apiGetEmailValCode);

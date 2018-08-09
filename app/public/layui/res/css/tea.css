@@ -22,7 +22,9 @@
     height: 60px;
     text-align: left;
     line-height: 60px;
-    font-size: 20px !important;
+    font-weight: bold;
+    text-shadow: 0px 0px 10px #009688;
+    font-size: 25px !important;
 }
 
 .tea-menu {
@@ -61,8 +63,4 @@
 
 .tea-checkpop-form {
     padding: 20px;
-}
-
-.layui-nav .layui-nav-item dl dd a {
-    padding: 0 10px;
 }
