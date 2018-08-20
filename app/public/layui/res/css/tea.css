@@ -17,13 +17,18 @@
 }
 
 .tea-login {
+    cursor: pointer;
     float: left;
     width: 120px;
     height: 60px;
     text-align: left;
     line-height: 60px;
     font-weight: bold;
-    text-shadow: 0px 0px 10px #009688;
+}
+
+.tea-login a {
+    color: #fff !important;
+    text-shadow: 0px 0px 10px #009688 !important;
     font-size: 25px !important;
 }
 

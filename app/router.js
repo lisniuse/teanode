@@ -23,10 +23,14 @@ module.exports = app => {
     router.get('/category/:categoryName', controller.category.index); //访问板块
 
     //其他页面
+    router.get('/about.html', controller.about.index); //关于
     router.get('/install.html', controller.install.pageInstall); //安装页
     router.get('/user/logout.html', controller.user.signout); //登出页
     router.get('/404.html', controller.error.notfound); //404
     router.post('/passport/local', localStrategy); //登录页
+
+    //文章相关
+    router.get('/article/publish.html', controller.article.publish); //文章发布
 
     //用户页面
     router.get('/user/home/:userId', controller.user.pageHome); //用户个人主页
