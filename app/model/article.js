@@ -19,8 +19,8 @@ module.exports = app => {
         }, //所属用户id
         
         title: { type: String }, //文章的标题
-        content: { type: String }, //文章内容
-
+        mdContent: { type: String }, //文章的markdown代码
+        htmlContent: { type: String }, //文章的html代码
         starCount: { type: Number, default: 0 }, //被点赞数量
         commentCount: { type: Number, default: 0 }, //被评论数量
         collCount: { type: Number, default: 0}, //被收藏的数量

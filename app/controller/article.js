@@ -8,12 +8,16 @@ class ArticleController extends Controller {
         ctx.body = "about";
     }
 
-    async publish() {
+    async pagePublish() {
         const { ctx, service, config } = this;
         let data = {
             user: ctx.user || {}
         };
         await ctx.render('/pages/article-publish', data);
+    }
+
+    async apiPublish() {
+        
     }
 }
 

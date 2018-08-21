@@ -48,12 +48,9 @@
                                             <div class="layui-input-block">
                                                 <select lay-verify="required" name="class" lay-filter="column">
                                                     <option></option>
-                                                    <option value="0">提问</option>
-                                                    <option value="99">分享</option>
-                                                    <option value="100">讨论</option>
-                                                    <option value="101">建议</option>
-                                                    <option value="168">公告</option>
-                                                    <option value="169">动态</option>
+                                                    <% webConfig.categoryConfig.forEach(function(item) { %>
+                                                    <option value="<%- item._id %>"><%- item.name %></option>
+                                                    <% }); %>
                                                 </select>
                                                 <div class="layui-unselect layui-form-select">
                                                     <div class="layui-select-title">
@@ -80,53 +77,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="layui-row layui-col-space15 layui-form-item layui-hide" id="LAY_quiz">
-                                        <div class="layui-col-md3">
-                                            <label class="layui-form-label">所属产品</label>
-                                            <div class="layui-input-block">
-                                                <select name="project">
-                                                    <option></option>
-                                                    <option value="layui">layui</option>
-                                                    <option value="独立版layer">独立版layer</option>
-                                                    <option value="独立版layDate">独立版layDate</option>
-                                                    <option value="LayIM">LayIM</option>
-                                                    <option value="Fly社区模板">Fly社区模板</option>
-                                                </select>
-                                                <div class="layui-unselect layui-form-select">
-                                                    <div class="layui-select-title">
-                                                        <input type="text" placeholder="请选择" value="" readonly="" class="layui-input layui-unselect">
-                                                        <i class="layui-edge"></i>
-                                                    </div>
-                                                    <dl class="layui-anim layui-anim-upbit">
-                                                        <dd lay-value="" class="layui-select-tips">请选择</dd>
-                                                        <dd lay-value="layui" class="">layui</dd>
-                                                        <dd lay-value="独立版layer" class="">独立版layer</dd>
-                                                        <dd lay-value="独立版layDate" class="">独立版layDate</dd>
-                                                        <dd lay-value="LayIM" class="">LayIM</dd>
-                                                        <dd lay-value="Fly社区模板" class="">Fly社区模板</dd>
-                                                    </dl>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="layui-col-md3">
-                                            <label class="layui-form-label" for="L_version">版本号</label>
-                                            <div class="layui-input-block">
-                                                <input type="text" id="L_version" value="" name="version" autocomplete="off" class="layui-input">
-                                            </div>
-                                        </div>
-                                        <div class="layui-col-md6">
-                                            <label class="layui-form-label" for="L_browser">浏览器</label>
-                                            <div class="layui-input-block">
-                                                <input type="text" id="L_browser" value="" name="browser" placeholder="浏览器名称及版本，如：IE 11" autocomplete="off" class="layui-input">
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="layui-form-item layui-form-text">
                                         <div class="layui-input-block" id="edit"></div>
                                     </div>
          
                                     <div class="layui-form-item">
-                                        <button class="layui-btn" lay-filter="*" lay-submit="">立即发布</button>
+                                        <button class="layui-btn" lay-filter="artPublishAction" lay-submit="">立即发布</button>
                                     </div>
                                 </form>
                             </div>

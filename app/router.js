@@ -30,7 +30,7 @@ module.exports = app => {
     router.post('/passport/local', localStrategy); //登录页
 
     //文章相关
-    router.get('/article/publish.html', controller.article.publish); //文章发布
+    router.get('/article/publish.html', controller.article.pagePublish); //文章发布
 
     //用户页面
     router.get('/user/home/:userId', controller.user.pageHome); //用户个人主页
@@ -42,6 +42,7 @@ module.exports = app => {
     router.post('/api/v1/user/signup', controller.user.apiSignup);
     router.post('/api/v1/user/signin', controller.user.apiSignin);
     router.post('/api/v1/install', controller.install.apiInstall);
+    router.post('/api/v1/article/publish', controller.article.apiPublish);
 };
 
 //请求码
