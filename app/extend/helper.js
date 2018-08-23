@@ -116,3 +116,31 @@ exports.bcompare = (str, hash) => {
 exports.randNum = function (min, max) {
     return parseInt(Math.random() * (max - min + 1) + min, 10);
 }
+
+exports.isInArray = (arr, value) => {
+    for (var i = 0; i < arr.length; i++) {
+        if (value === arr[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+exports.filterFields = (filArr, obj) => {
+    let newObj = {}
+    for (let key in obj) {
+        if (this.isInArray(filArr, key) && obj[key] !== "" && obj[key] !== undefined) {
+            newObj[key] = obj[key]
+        }
+    }
+    return newObj;
+}
+
+exports.throwError = function (ctx, msg, code) {
+    ctx.body = {
+        code: code ? code : 1,
+        msg: msg,
+    };
+    return false;
+}

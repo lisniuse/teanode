@@ -12,7 +12,7 @@ module.exports = app => {
             type: mongoose.Schema.ObjectId,
             ref: 'Category'
         }, //所属板块/种类的id
-        order: { type: Number, default: 0 }, //排序权重
+        order: { type: Number, default: 999 }, //排序权重
         userId: {
             type: mongoose.Schema.ObjectId,
             ref: 'User'

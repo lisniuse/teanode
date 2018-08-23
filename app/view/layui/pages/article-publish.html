@@ -46,7 +46,7 @@
                                         <div class="layui-col-md3">
                                             <label class="layui-form-label">所在专栏</label>
                                             <div class="layui-input-block">
-                                                <select lay-verify="required" name="class" lay-filter="column">
+                                                <select lay-verify="required" name="categoryId" lay-filter="column">
                                                     <option></option>
                                                     <% webConfig.categoryConfig.forEach(function(item) { %>
                                                     <option value="<%- item._id %>"><%- item.name %></option>
