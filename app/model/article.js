@@ -13,6 +13,7 @@ module.exports = app => {
             ref: 'Category'
         }, //所属板块/种类的id
         order: { type: Number, default: 999 }, //排序权重
+        isDistinctive: {type: Boolean, default: false}, //精华
         userId: {
             type: mongoose.Schema.ObjectId,
             ref: 'User'
